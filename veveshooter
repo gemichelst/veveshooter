@@ -3,6 +3,9 @@
 SOURCE_DIR=`pwd`
 LOG_FILE="$SOURCE_DIR/tmp/veveshooter.log"
 SOURCE_BIN="$SOURCE_DIR/src/veveshooter.py"
+VERSION_FILE="$SOURCE_DIR/VERSION"
+source $VERSION_FILE
+APP_VERSION_FULL="v$APP_VERSION"
 DD=$(date +%d)
 MM=$(date +%m)
 YY=$(date +%g)
@@ -12,8 +15,9 @@ SS=$(date +%S)
 CUR_DATE="$DD-$MM-$YY $HH:$II:$SS"
 
 # LOG TO STDOUT
-echo "veveshooter"
-echo "v0.1(27112021)"
+echo " "
+echo " "
+echo "veveshooter $APP_VERSION_FULL"
 echo "                          _                 _            "
 echo "__   _______   _____  ___| |__   ___   ___ | |_ ___ _ __ "
 echo "\ \ / / _ \ \ / / _ \/ __| '_ \ / _ \ / _ \| __/ _ \ '__|"
