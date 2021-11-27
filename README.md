@@ -40,6 +40,7 @@ cd veveshooter
 ## WEB-GUI
 While running veveshooter you will find a simple WEB GUI where you can view and edit
 all your past or next shoots. The GUI was made for mobile and should look and run fine on any device.
+With the default config you will find the GUI at http://localhost:8000 . 
 
 ![alt text](screenshot.png "veveshooter screenshot")
 
