@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+SOURCE_DIR=`pwd`
+LOG_FILE="$SOURCE_DIR/tmp/veveshooter.log"
+SOURCE_BIN="$SOURCE_DIR/src/veveshooter.py"
+DD=$(date +%d)
+MM=$(date +%m)
+YY=$(date +%g)
+HH=$(date +%H)
+II=$(date +%M)
+SS=$(date +%S)
+CUR_DATE="$DD-$MM-$YY $HH:$II:$SS"
+
+# LOG TO STDOUT
+echo "veveshooter"
+echo "v0.1(27112021)"
+echo "                          _                 _            "
+echo "__   _______   _____  ___| |__   ___   ___ | |_ ___ _ __ "
+echo "\ \ / / _ \ \ / / _ \/ __| '_ \ / _ \ / _ \| __/ _ \ '__|"
+echo " \ V /  __/\ V /  __/\__ \ | | | (_) | (_) | ||  __/ |   "
+echo "  \_/ \___| \_/ \___||___/_| |_|\___/ \___/ \__\___|_|   "
+echo " "
+echo " "
+echo " "
+
+exec /usr/bin/env python3 $SOURCE_BIN
