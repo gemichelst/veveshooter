@@ -1,5 +1,4 @@
 # veveshooter
-
 ```
                           _                 _            
 __   _______   _____  ___| |__   ___   ___ | |_ ___ _ __ 
@@ -8,7 +7,6 @@ __   _______   _____  ___| |__   ___   ___ | |_ ___ _ __
   \_/ \___| \_/ \___||___/_| |_|\___/ \___/ \__\___|_|
 
 ```
-
 Plugin as many android phones as possible and perfom a tap on the buy veve buy button on point.
 Configured shoots will be triggered by given date and time.
 ALl you need to do is to open the app and browse to the item you want to buy - dont close it needs to stay open.
@@ -28,17 +26,24 @@ git clone git@github.com:gemichelst/veveshooter.git && cd veveshooter
 ```
 
 ## CONFIGURATION
-
+No configuration needed so far.
 
 ## USAGE
+To start the veveshooter you need to enter the cloned repo dir and execute the binary file
+for linux/mac or windows. 
+
+```
+cd veveshooter
+./veveshooter
+```
 
 ## WEB-GUI
+While running veveshooter you will find a simple WEB GUI where you can view and edit
+all your past or next shoots. The GUI was made for mobile and should look and run fine on any device.
+
 ![alt text](screenshot.png "veveshooter screenshot")
 
 
-
-
 ## Authors
-
 * **Michael M.** - *BackendDevelopment/Animations/Frontend/Webdesign*
 * **Danny B.** - *Conception/Idea*
