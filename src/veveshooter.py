@@ -3,11 +3,12 @@
 #
 
 #### IMPORT ####################################################################################################################################################
-import os, time, io, json, socket, http.server, socketserver, logging, csv, re, subprocess, tempfile
+import os, sys, time, io, json, socket, http.server, socketserver, logging, csv, re, subprocess, tempfile
 from bottle import route, run, get, post, request, response, template, static_file
 
 
 #### VARS #####################################################################################################################################################
+DEBUG               = False
 HOST_PORT           = 8000
 HOST_NAME 	        = socket.gethostname()
 HOST_IP             = '0.0.0.0'
@@ -23,8 +24,9 @@ def get_Host_name_IP():
     try:
         HOST_NAME = socket.gethostname()
         HOST_IP = socket.gethostbyname(HOST_NAME)
-        print("HOSTNAME :  ",HOST_NAME)
-        print("IP : ",HOST_IP)
+        if DEBUG:
+            print("HOSTNAME :  ",HOST_NAME)
+            print("IP : ",HOST_IP)
     except:
         print("Unable to get Hostname and IP")
 
@@ -37,11 +39,53 @@ def os_system(command):
             break
         yield line
 
-# SAVE DEVICE CONF
-def saveDeviceFile(device_file,device_id,device_title,device_usbid,device_desc,device_icon):
-    f = open(device_file, "w")
-    f.write('{ "title": "' + device_title + '", "deviceID": ' + device_id + ', "usbID": "' + device_usbid + '", "desc": "' + device_desc + '", "icon": "' + device_icon + '" }')
+# ADD SHOOT
+def addToShootFile(device,datetime,shoot_minute,shoot_hour,shoot_day,shoot_month):
+    shoot_file = './data/shoots.json'
+
+    # DELETE LAST LINE FROM SHOOT_FILE
+    fd=open(shoot_file,"r")
+    d=fd.read()
+    fd.close()
+    m=d.split("\n")
+    s="\n".join(m[:-1])
+    fd=open(shoot_file,"w+")
+    for i in range(len(s)):
+        fd.write(s[i])
+    fd.close()
+
+    # APPEND NEW LINE
+    f = open(shoot_file, "a")
+    f.write('\n\t\t,{ "device": "' + device + '", "datetime": "' + datetime + '" }\n]')
     f.close()
+
+    # ADD CRONTAB TO USERS CRONFILE
+    # MM HH DD MONTH 1-5 echo hello
+    cmd = '(crontab -l ; echo "' + shoot_minute + ' ' + shoot_hour + ' ' + shoot_day + ' ' + shoot_month + ' 1-5 veveshoot-now") | crontab -'
+    #cmd = "crontab"
+    #cmd_args = "-ls"
+    subprocess.run([cmd])
+
+# PERFORM DROP SHOOT
+def dropShootNOW(device,datetime):
+    tapX = 500
+    tapY = 1450
+    cmd = "adb"
+    if device=='any':
+        cmd_args += 'shell'
+        cmd_args += 'input'
+        cmd_args += 'tap'
+        cmd_args += '500'
+        cmd_args += '1450'
+    else:
+        cmd_args = '-s ' 
+        cmd_args += device 
+        cmd_args += 'shell'
+        cmd_args += 'input'
+        cmd_args += 'tap'
+        cmd_args += '500'
+        cmd_args += '1450'
+    subprocess.run([cmd, cmd_args])
 
 
 #### ROUTES ####################################################################################################################################################
@@ -65,18 +109,27 @@ def server_static(filepath):
 #def server_static(filename):
 #    return static_file(filename, root=WWW_DIR)
 
-# SAVE DEVICES
-# @route('/saveDevice', method='GET')
-# def saveDevice():
-#     device_id       = request.query.get('id')
-#     device_title    = request.query.get('devicename')
-#     device_usbid    = request.query.get('usbid')
-#     device_desc     = request.query.get('desc')
-#     device_icon     = request.query.get('icon')
-#     device_file     = CONF_DEVICES_DIR + '/device_' + device_id + '.json'
-#     saveDeviceFile(device_file,device_id,device_title,device_usbid,device_desc,device_icon)
-#     return template("device_id: {{device_id}}\ndevice_title: {{device_title}}\ndevice_usbid: {{device_usbid}}\ndevice_desc: {{device_desc}}\ndevice_icon: {{device_icon}}\n device_file: {{device_file}}", device_id=device_id, device_title=device_title, device_usbid=device_usbid, device_desc=device_desc, device_icon=device_icon, device_file=device_file)
+# ADD SHOOT
+@route('/addShoot', method='GET')
+def addShoot():
+    device      = request.query.get('device')
+    shoot_day   = request.query.get('shoot_day')
+    shoot_month = request.query.get('shoot_month')
+    shoot_year  = request.query.get('shoot_year')
+    shoot_hour  = request.query.get('shoot_hour')
+    shoot_minute= request.query.get('shoot_minute')
+    datetime    = shoot_year + '-' + shoot_month + '-' + shoot_day + ' ' + shoot_hour + ':' + shoot_minute + ':00';
+    addToShootFile(device,datetime,shoot_minute,shoot_hour,shoot_day,shoot_month)
+    return template("device: {{device}}\ndatetime: {{datetime}}", device=device, datetime=datetime)
 
+# PERFOM SHOOT
+@route('/dropShoot', method='GET')
+def dropShoot():
+    device      = request.query.get('device')
+    datetime    = request.query.get('datetime')
+    dropShootNOW(device,datetime)
+
+# LIST DEVICES FROM ADB
 @route('/listDevices', method='GET')
 def adbDeviceList():
     with open(os.devnull, 'wb') as devnull:
@@ -102,7 +155,8 @@ def adbDeviceList():
 
 #### ACTION ###################################################################################################################################################
 if __name__ == "__main__":
-	print(time.asctime(), "\nHOST: %s:%s\nIP: %s\nWWW: %s" % (HOST_NAME, HOST_PORT, HOST_IP, WWW_DIR))
+	# startup message with datetime host ip www-dir
+    #print(time.asctime(), "\nHOST: %s:%s\nIP: %s\nWWW: %s" % (HOST_NAME, HOST_PORT, HOST_IP, WWW_DIR))
 	try:
 		run(host='0.0.0.0', port=HOST_PORT, debug=True)
 	except KeyboardInterrupt:

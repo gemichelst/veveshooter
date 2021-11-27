@@ -46,10 +46,41 @@ function csv_output(data) {
 				// html += '<td class="mdc-data-table__cell mdc-data-table__cell--numeric">' + colData + '</td>';
 			});
 			html += '</tr>';
-		  
 		});
 		$('#tbody').append(html);
 	  }
+}
+
+function dataJSON() {
+
+	// DEVICES
+	var devices_json_file = 'http://localhost:8000/listDevices';
+	$.getJSON( devices_json_file, function( data ) {
+		var menu;
+		$.each(data, function( index, row ) {
+			$.each(row, function( index, colData ) {
+				menu += '<option value="' + colData + '">' + colData + '</option>';
+			}); 
+		});
+		$('#device').append(menu);
+	});
+	
+	// SHOOTS
+	var shoots_json_file = '/data/shoots.json';
+	$.getJSON( shoots_json_file, function( data ) {
+		var html;
+		$.each(data, function( index, row ) {
+			html += '<tr class="mdc-data-table__row">';
+			html += '<td class="mdc-data-table__cell mdc-data-table__cell--checkbox td-delete"><span class="material-icons" data-shootid="" id="btn-delete">delete</span></td>';
+			$.each(row, function( index, colData ) {
+				html += '<td class="mdc-data-table__cell mdc-data-table__cell--numeric">' + colData + '</td>';
+				// html += '<td class="mdc-data-table__cell mdc-data-table__cell--numeric">' + colData + '</td>';
+			});
+			html += '</tr>';		  
+		});
+		$('#tbody').append(html);
+
+	});
 }
 
 ///////////
@@ -64,18 +95,22 @@ console.log('coded by www.madz.dev');
 console.log('\n');
 
 // READ CSV
-var data_CSV;
-$.ajax({
-	type: "GET",
-	url: "data/shoots.csv",
-	dataType: "text",
-	success: function(response)
-	{
-		data_CSV = $.csv.toArrays(response);
-		csv_output(data_CSV);
-		if(debug==true){console.log(data);}
-	} 
-});
+// var data_CSV;
+// $.ajax({
+// 	type: "GET",
+// 	url: "data/shoots.csv",
+// 	dataType: "text",
+// 	success: function(response)
+// 	{
+// 		data_CSV = $.csv.toArrays(response);
+// 		csv_output(data_CSV);
+// 		if(debug==true){console.log(data);}
+// 	} 
+// });
+
+// ADB DEVICES AND APPEND TO MMENU
+// READ SHOOTS.JSON AND APPEND TO TABLE
+dataJSON();
 
 
 

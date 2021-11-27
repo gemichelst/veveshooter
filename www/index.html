@@ -18,16 +18,17 @@
     <div class="container">
         <div class="container-title" id="container-title-add">shoot.add</div>
         <div class="container-input">
+          <form method="get" action="/addShoot">
           <div class="container-input-datetime">
             <span class="material-icons">date_range</span>
-            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="year" name="year">
+            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="year" name="shoot_year">
               <option selected>2021</option>
               <option>2022</option>
               <option>2023</option>
               <option>2024</option>
               <option>2025</option>
             </select>
-            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="month" name="month">
+            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="month" name="shoot_month">
               <option>01</option>
               <option>02</option>
               <option>03</option>
@@ -41,7 +42,7 @@
               <option selected>11</option>
               <option>12</option>
             </select>
-            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="day" name="day">
+            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="day" name="shoot_day">
               <option selected>01</option>
               <option>01</option>
               <option>02</option>
@@ -77,7 +78,7 @@
           </div>
           <div class="container-input-datetime">
             <span class="material-icons" id="time">schedule</span>
-            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="hour" name="hour">
+            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="hour" name="shoot_hour">
               <option selected>00</option>
               <option>01</option>
               <option>02</option>
@@ -105,7 +106,7 @@
               <option>24</option>
             </select>
             <span id="clock-divider">:</span>
-            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="minute" name="minute">
+            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="minute" name="shoot_minute">
               <option selected>00</option>
               <option>01</option>
               <option>02</option>
@@ -170,14 +171,14 @@
           </div>
           <div class="container-input-device">
             <select class="mdc-select mdc-select--outlined container-input-device_select" id="device" name="device">
-              <option selected>all available devices</option>
-              <!-- dynamic fill with result of adb devices -->
+              <option value="any" selected>any available device</option>
             </select>            
-            <button class="btn-save mdc-button mdc-button--outlined">
+            <button class="btn-save mdc-button mdc-button--outlined" onclick="this.form.submit();">
               <span class="mdc-button__ripple"></span>
               <span class="mdc-button__label">ADD</span>
             </button>
           </div>
+          </form>
         </div>
 
     <div class="container-shoots">
