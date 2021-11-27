@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>veveshooter v0.1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="application-name" content="veveshooter">
+    <meta name="author" content="Michael Matzat (www.madz.dev)">
+    <meta name="description" content="automatic drop shooter">
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/www/assets/css/style.css">
+</head>
+
+<body class="mdc-typography">
+  <h3 class="top">veveshooter v0.1</h3>
+    <div class="container">
+        <div class="container-title" id="container-title-add">shoot.add</div>
+        <div class="container-input">
+          <div class="container-input-datetime">
+            <span class="material-icons">date_range</span>
+            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="year" name="year">
+              <option selected>2021</option>
+              <option>2022</option>
+              <option>2023</option>
+              <option>2024</option>
+              <option>2025</option>
+            </select>
+            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="month" name="month">
+              <option>01</option>
+              <option>02</option>
+              <option>03</option>
+              <option>04</option>
+              <option>05</option>
+              <option>06</option>
+              <option>07</option>
+              <option>08</option>
+              <option>09</option>
+              <option>10</option>
+              <option selected>11</option>
+              <option>12</option>
+            </select>
+            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="day" name="day">
+              <option selected>01</option>
+              <option>01</option>
+              <option>02</option>
+              <option>03</option>
+              <option>04</option>
+              <option>05</option>
+              <option>06<option>
+              <option>07</option>
+              <option>08</option>
+              <option>09</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+              <option>21</option>
+              <option>22</option>
+              <option>23</option>
+              <option>24</option>
+              <option>25</option>
+              <option>26</option>
+              <option>27</option>
+              <option>28</option>
+              <option>29</option>
+              <option>30</option>
+            </select>
+          </div>
+          <div class="container-input-datetime">
+            <span class="material-icons" id="time">schedule</span>
+            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="hour" name="hour">
+              <option selected>00</option>
+              <option>01</option>
+              <option>02</option>
+              <option>03</option>
+              <option>04</option>
+              <option>05</option>
+              <option>06<option>
+              <option>07</option>
+              <option>08</option>
+              <option>09</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+              <option>21</option>
+              <option>22</option>
+              <option>23</option>
+              <option>24</option>
+            </select>
+            <span id="clock-divider">:</span>
+            <select class="mdc-select mdc-select--outlined container-input-datetime_select" id="minute" name="minute">
+              <option selected>00</option>
+              <option>01</option>
+              <option>02</option>
+              <option>03</option>
+              <option>04</option>
+              <option>05</option>
+              <option>06<option>
+              <option>07</option>
+              <option>08</option>
+              <option>09</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+              <option>21</option>
+              <option>22</option>
+              <option>23</option>
+              <option>24</option>
+              <option>25</option>
+              <option>26</option>
+              <option>27</option>
+              <option>28</option>
+              <option>29</option>
+              <option>30<option>
+              <option>31</option>
+              <option>32</option>
+              <option>33</option>
+              <option>34</option>
+              <option>35</option>
+              <option>36</option>
+              <option>37</option>
+              <option>38</option>
+              <option>39</option>
+              <option>40</option>
+              <option>41</option>
+              <option>42</option>
+              <option>43</option>
+              <option>44</option>
+              <option>45</option>
+              <option>46</option>
+              <option>47</option>
+              <option>48</option>
+              <option>49</option>
+              <option>50</option>
+              <option>51</option>
+              <option>52</option>
+              <option>53</option>
+              <option>54<option>
+              <option>55</option>
+              <option>56</option>
+              <option>57</option>
+              <option>58</option>
+              <option>59</option>
+            </select>
+          </div>
+          <div class="container-input-device">
+            <select class="mdc-select mdc-select--outlined container-input-device_select" id="device" name="device">
+              <option selected>all available devices</option>
+              <!-- dynamic fill with result of adb devices -->
+            </select>            
+            <button class="btn-save mdc-button mdc-button--outlined">
+              <span class="mdc-button__ripple"></span>
+              <span class="mdc-button__label">ADD</span>
+            </button>
+          </div>
+        </div>
+
+    <div class="container-shoots">
+      <div class="container-title">shoot.list</div>
+      <div class="mdc-data-table">
+        <div class="mdc-data-table__table-container">
+          <table class="mdc-data-table__table" aria-label="Dessert calories">
+            <thead>
+              <tr class="mdc-data-table__header-row">
+                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">&nbsp;</th>
+                <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">phoneID</th>
+                <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">datetime</th>
+              </tr>
+            </thead>
+            <tbody class="mdc-data-table__content" id="tbody">
+              <!-- dynamic data -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<script>window.mdc.autoInit();</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+<script src="/www/src/js/default.js"></script>
+</html>

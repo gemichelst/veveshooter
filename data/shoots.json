@@ -1,0 +1,24 @@
+{
+	"shoots": [
+		{
+			"devices": "phoneid1",
+			"daatetime": "2021-01-01 12:01:32"
+		},
+		{
+			"devices": "phoneid2",
+			"daatetime": "2021-01-02 13:01:32"
+		},
+		{
+			"devices": "phoneid3",
+			"daatetime": "2021-01-03 14:01:32"
+		},
+		{
+			"devices": "phoneid4",
+			"daatetime": "2021-01-04 15:01:32"
+		},
+		{
+			"devices": "phoneid5",
+			"daatetime": "2021-01-05 16:01:32"
+		}
+	]
+}

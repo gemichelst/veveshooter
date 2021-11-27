@@ -1,0 +1,61 @@
+.top {
+    margin-bottom: 16px;
+    border-bottom: 8px solid;
+}
+
+.container {
+    margin: 8px;
+}
+
+.container-title {
+    font-weight: 200;
+}
+
+.container-title#container-title-add {
+    margin-bottom: -15px;
+}
+
+.container-input,
+.container-shoots {
+    width: 100%;
+}
+
+.container-input {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.container-input-datetime,
+.container-input-device {
+    padding: 8px;
+}
+
+.container-input-device_select,
+.container-input-datetime_select {
+    height: 46px;
+    font-size: 24px;
+    background-color: transparent;
+}
+
+.btn-save {
+    float: right;
+    height: 46px;
+}
+
+.mdc-data-table {
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.td-delete {
+    text-align: center;
+    cursor: pointer;
+}
+
+#clock-divider {
+    margin-left: -4px;
+    margin-right: -4px;
+    font-size: 24px;
+}
