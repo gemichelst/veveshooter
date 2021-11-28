@@ -54,7 +54,7 @@ function csv_output(data) {
 function dataJSON() {
 
 	// DEVICES
-	var devices_json_file = 'http://localhost:8000/listDevices';
+	var devices_json_file = 'http://192.168.11.73:8000/listDevices';
 	$.getJSON( devices_json_file, function( data ) {
 		var menu;
 		$.each(data, function( index, row ) {

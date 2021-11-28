@@ -10,9 +10,9 @@ from bottle import route, run, get, post, request, response, template, static_fi
 #### VARS #####################################################################################################################################################
 DEBUG               = False
 HOST_PORT           = 8000
-HOST_NAME 	        = socket.gethostname()
-HOST_IP             = '0.0.0.0'
-WWW_DIR 	        = 'www'
+HOST_NAME 	    = socket.gethostname()
+HOST_IP             = socket.gethostbyname(HOST_NAME)
+WWW_DIR 	    = 'www'
 WWW_INDEX           = 'www/index.html'
 DATA_DIR            = 'data'
 DATA_CSV            = 'data/shoots.csv'
@@ -129,6 +129,15 @@ def dropShoot():
     datetime    = request.query.get('datetime')
     dropShootNOW(device,datetime)
 
+# GET IP
+@route('/getLocalIP', method='GET')
+def getLocalIP():
+    json_template = template("{{HOST_IP}}", HOST_IP=HOST_IP)
+    #return json_template
+    json_encoded = json.dumps(json_template, indent=4, sort_keys=True)
+    json_decoded = json.loads(json_encoded)
+    return { 'HOST_IP': json_decoded, }
+
 # LIST DEVICES FROM ADB
 @route('/listDevices', method='GET')
 def adbDeviceList():
@@ -155,9 +164,8 @@ def adbDeviceList():
 
 #### ACTION ###################################################################################################################################################
 if __name__ == "__main__":
-	# startup message with datetime host ip www-dir
-    #print(time.asctime(), "\nHOST: %s:%s\nIP: %s\nWWW: %s" % (HOST_NAME, HOST_PORT, HOST_IP, WWW_DIR))
 	try:
+		#print(time.asctime(), "\nHOST_NAME: %s\nHOST_IP: %s\nHOST_PORT: %s" % (HOST_NAME, HOST_IP, HOST_PORT))
 		run(host='0.0.0.0', port=HOST_PORT, debug=True)
 	except KeyboardInterrupt:
 		pass
