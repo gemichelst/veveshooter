@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+OPTION="$1"
+WORKINGDIR=$(pwd)
+
+if [ $OPTION == "start-daemon"]; then
+	cd $WORKINGDIR
+	./veveshooter &
+else
+	cd $WORKINGDIR && ./veveshooter
+fi

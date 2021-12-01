@@ -61,10 +61,10 @@ def addToShootFile(device,datetime,shoot_minute,shoot_hour,shoot_day,shoot_month
 
     # ADD CRONTAB TO USERS CRONFILE
     # MM HH DD MONTH 1-5 echo hello
-    cmd = '(crontab -l ; echo "' + shoot_minute + ' ' + shoot_hour + ' ' + shoot_day + ' ' + shoot_month + ' 1-5 veveshoot-now") | crontab -'
-    #cmd = "crontab"
-    #cmd_args = "-ls"
-    subprocess.run([cmd])
+    cmd_data = shoot_minute + ' ' + shoot_hour + ' ' + shoot_day + ' ' + shoot_month
+    cmd = 'veve-add-cron'
+    cmd_args = cmd_data
+    subprocess.run([cmd, cmd_args])
 
 # PERFORM DROP SHOOT
 def dropShootNOW(device,datetime):
@@ -72,7 +72,7 @@ def dropShootNOW(device,datetime):
     tapY = 1450
     cmd = "adb"
     if device=='any':
-        cmd_args += 'shell'
+        cmd_args = 'shell'
         cmd_args += 'input'
         cmd_args += 'tap'
         cmd_args += '500'
