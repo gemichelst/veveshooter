@@ -10,9 +10,9 @@ from bottle import route, run, get, post, request, response, template, static_fi
 #### VARS #####################################################################################################################################################
 DEBUG               = False
 HOST_PORT           = 8000
-HOST_NAME 	    = socket.gethostname()
+HOST_NAME           = socket.gethostname()
 HOST_IP             = socket.gethostbyname(HOST_NAME)
-WWW_DIR 	    = 'www'
+WWW_DIR             = 'www'
 WWW_INDEX           = 'www/index.html'
 DATA_DIR            = 'data'
 DATA_CSV            = 'data/shoots.csv'
@@ -61,9 +61,18 @@ def addToShootFile(device,datetime,shoot_minute,shoot_hour,shoot_day,shoot_month
 
     # ADD CRONTAB TO USERS CRONFILE
     # MM HH DD MONTH 1-5 echo hello
+    # cmd_data = (shoot_minute, shoot_hour, shoot_day, shoot_month, device)
+    # cmd_data = shoot_minute + shoot_hour + shoot_day + shoot_month + device
     cmd_data = shoot_minute + ' ' + shoot_hour + ' ' + shoot_day + ' ' + shoot_month
-    cmd = 'veve-add-cron'
     cmd_args = cmd_data
+    
+    # cmd_args = shoot_minute
+    # cmd_args += shoot_hour
+    # cmd_args += shoot_day
+    # cmd_args += shoot_month
+    # cmd_args += device
+
+    cmd = 'veveshooter-add-cron'
     subprocess.run([cmd, cmd_args])
 
 # PERFORM DROP SHOOT

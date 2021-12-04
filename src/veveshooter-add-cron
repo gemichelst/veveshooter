@@ -1,0 +1,27 @@
+#!/bin/bash
+# $1 = minute $2 = hour $3 = day $4 = month $5 = deviceid
+source /usr/local/etc/veveshooter.conf
+WORKINGDIR=$VEVESHOOTER_DIR
+
+ALL=$1
+
+# MINUTE=$1
+# HOUR=$2
+# DAY=$3
+# MONTH=$4
+# DEVICE=$5
+
+# CRON_PRE="$MINUTE $HOUR $DAY $MONTH"
+# CRON_AFTER="1-5 /usr/local/bin/veveshooter-now $DEVICE >/dev/null 2>&1"
+# CRON_FULL="$CRON_PRE $CRON_AFTER"
+
+CRON_REBOOT="@reboot /usr/local/bin/veveshooter-starter daemon-start > /media/share/veveshooter/tmp/veveshooter.log"
+
+#echo "$MINUTE $HOUR $DAY $MONTH 1-5 veveshooter-now $DEVICE >/dev/null 2>&1" >> $WORKINGDIR/data/shoots.cron
+#(crontab -l;echo "$MINUTE $HOUR $DAY $MONTH 1-5 /usr/local/bin/veveshooter-now $DEVICE >/dev/null 2>&1") | crontab -
+
+echo "$ALL 1-5 veveshooter-now >/dev/null 2>&1" >> $WORKINGDIR/data/shoots.cron
+(crontab -l;echo "$ALL 1-5 /usr/local/bin/veveshooter-now >/dev/null 2>&1") | crontab -
+
+
+exit 0

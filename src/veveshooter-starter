@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+OPTION=$1
+#WORKINGDIR=$(pwd)
+source /usr/local/etc/veveshooter.conf
+WORKINGDIR=$VEVESHOOTER_DIR
+
+echo "VEVESHOOTER-STARTER v1"
+echo "###################################################"
+echo " "
+echo "VEVESHOOTER_DIR: $WORKINGDIR"
+echo "VEVESHOOTER_BIN: $WORKINGDIR/veveshooter"
+
+if [ $OPTION == "start-daemon"]; then
+	cd $WORKINGDIR
+	./veveshooter &
+else
+	cd $WORKINGDIR && ./veveshooter
+fi
+
+exit 0
