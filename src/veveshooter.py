@@ -61,17 +61,8 @@ def addToShootFile(device,datetime,shoot_minute,shoot_hour,shoot_day,shoot_month
 
     # ADD CRONTAB TO USERS CRONFILE
     # MM HH DD MONTH 1-5 echo hello
-    # cmd_data = (shoot_minute, shoot_hour, shoot_day, shoot_month, device)
-    # cmd_data = shoot_minute + shoot_hour + shoot_day + shoot_month + device
     cmd_data = shoot_minute + ' ' + shoot_hour + ' ' + shoot_day + ' ' + shoot_month
     cmd_args = cmd_data
-    
-    # cmd_args = shoot_minute
-    # cmd_args += shoot_hour
-    # cmd_args += shoot_day
-    # cmd_args += shoot_month
-    # cmd_args += device
-
     cmd = 'veveshooter-add-cron'
     subprocess.run([cmd, cmd_args])
 
@@ -129,7 +120,8 @@ def addShoot():
     shoot_minute= request.query.get('shoot_minute')
     datetime    = shoot_year + '-' + shoot_month + '-' + shoot_day + ' ' + shoot_hour + ':' + shoot_minute + ':00';
     addToShootFile(device,datetime,shoot_minute,shoot_hour,shoot_day,shoot_month)
-    return template("device: {{device}}\ndatetime: {{datetime}}", device=device, datetime=datetime)
+    #return template("device: {{device}}\ndatetime: {{datetime}}", device=device, datetime=datetime)
+    return static_file('index.html', root=WWW_DIR)
 
 # PERFOM SHOOT
 @route('/dropShoot', method='GET')
