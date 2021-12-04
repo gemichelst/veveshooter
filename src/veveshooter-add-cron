@@ -20,7 +20,7 @@ CRON_REBOOT="@reboot /usr/local/bin/veveshooter-starter daemon-start > /media/sh
 #echo "$MINUTE $HOUR $DAY $MONTH 1-5 veveshooter-now $DEVICE >/dev/null 2>&1" >> $WORKINGDIR/data/shoots.cron
 #(crontab -l;echo "$MINUTE $HOUR $DAY $MONTH 1-5 /usr/local/bin/veveshooter-now $DEVICE >/dev/null 2>&1") | crontab -
 
-echo "$ALL 1-5 veveshooter-now >/dev/null 2>&1" >> $WORKINGDIR/data/shoots.cron
+echo "$ALL 1-5 /usr/local/bin/veveshooter-now >/dev/null 2>&1" >> $WORKINGDIR/data/shoots.cron
 (crontab -l;echo "$ALL 1-5 /usr/local/bin/veveshooter-now >/dev/null 2>&1") | crontab -
 
 

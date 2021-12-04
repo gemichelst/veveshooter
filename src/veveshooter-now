@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+OPTION=$1
+#WORKINGDIR=$(pwd)
+source /usr/local/etc/veveshooter.conf
+WORKINGDIR=$VEVESHOOTER_DIR
+VEVESHOOTER_DROP_URL="http://$VEVESHOOTER_IP:$VEVESHOOTER_PORT/dropShoot"
+
+echo "VEVESHOOTER-NOW v1"
+echo "###################################################"
+echo " "
+echo "VEVESHOOTER_DIR: $WORKINGDIR"
+echo "VEVESHOOTER_BIN: $WORKINGDIR/veveshooter"
+echo "VEVESHOOTER_DROP_URL: $VEVESHOOTER_DROP_URL"
+
+#wget $VEVESHOOTER_DROP_URL
+wget http://localhost:8000/dropShoot
+exit 0
